@@ -8,43 +8,25 @@
 #### 还准备定义一个caught类，写一个caught后的位移动画
 #### 但是用canvas写的，这个没办法
 #### 后来想如果是写个位移动画，不就是一帧帧地把caught的点的坐标向鼠标靠拢嘛，然后就豁然开朗了。。。
-`< //鼠标点之间的连线和捕捉 >`
 
-`<   if(catchDot(dot)){ >`
-
-`<  >`
+```
+ //鼠标点之间的连线和捕捉
+   if(catchDot(dot)){ 
       let distance = dis(dot, mouse);
-`<  >`
       let opacity = (1-(distance/22500)).toFixed(1);
-`<  >`
       if(distance < 22500){
-`<  >`
           ctx.beginPath();
-`<  >`
           ctx.lineWidth = 1;
-`<  >`
           ctx.strokeStyle = 'rgba(255,255,255,' + opacity +')';
-`<  >`
           ctx.moveTo(dot.x, dot.y);
-`<  >`
           ctx.lineTo(mouse.x, mouse.y);
-`<  >`
           ctx.stroke();
-`<  >`
           //捕捉
-`<  >`
           if(distance > 10000){
-`<  >`
               dot.x -= (dot.x - mouse.x)*0.02;
-`<  >`
               dot.y -= (dot.y - mouse.y)*0.02;
-`<  >`
           }
-`<  >`
       }
-`<  >`
   }
-`<  >`
->`
-`<  >`
+```
 #### 每一帧靠近0.02倍距离
