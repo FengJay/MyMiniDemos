@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <canvas id="can">
+
+    </canvas>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        body{
+            width: 100vw;
+            height: 100vh;
+        }
+        #can{
+            background-color: black;
+        }
+    </style>
+    <script>
+        let canvas = document.getElementById("can");
+        canvas.width = document.body.clientWidth;
+        canvas.height = document.body.clientHeight;
+        let ctx = canvas.getContext("2d");
+        let dots = [];
+        let rID = null; 
+
+        for (var i = 0; i < 200; i++) {
+            var x = Math.random() * canvas.width;
+            var y = Math.random() * canvas.height;
+            var xa = Math.random() * 2 - 1;
+            var ya = Math.random() * 2 - 1;
+
+            dots.push({x, y, xa, ya})
+        }
+        
+        let mouse = {};
+        //监听鼠标移动获取鼠标位置
+        this.addEventListener("mousemove", (e)=>{
+            mouse.x = e.clientX;
+            mouse.y = e.clientY;
+        })
+
+        anime();  //初始化完成，开始绘制
+
+        function dis(p1, p2){
+            return (p1.x - p2.x)**2 + (p1.y - p2.y)**2;
+        }
+
+        function catchDot(p){
+            return dis(p, mouse) < 22500;
+        }
+
+        function anime(){
+            ctx.clearRect(0, 0, canvas.width, canvas.height); //先清空画布
+
+            //鼠标位置的点
+            ctx.fillStyle = 'rgba(255,255,255,1)';
+            ctx.fillRect(mouse.x - 1, mouse.y - 1, 2, 2);
+
+            let ndots = [].concat(dots);
+
+            for(let dot of ndots){
+                let nOtherDots = [].concat(dots); //空间换时间，减少一半的距离计算
+
+                dot.x += dot.xa;
+                dot.y += dot.ya;
+
+                // 遇到边界将速度反向
+                dot.xa *= (dot.x > canvas.width || dot.x < 0) ? -1 : 1;
+                dot.ya *= (dot.y > canvas.height || dot.y < 0) ? -1 : 1;
+
+                // 绘制点
+                ctx.fillStyle = 'rgba(255,255,255,1)';
+                ctx.fillRect(dot.x - 1, dot.y - 1, 2, 2);  // 2*2 的矩形当作点，arc画圆也行，但是效率比这个低
+
+                //绘制距离内的点之间的线
+                let count = 0;
+                for(let otherDot of nOtherDots.splice(nOtherDots.indexOf(dot))){
+                    let distance = dis(dot, otherDot);
+                    let opacity = (1-(distance/5000)).toFixed(1);
+
+                    if(distance < 5000){
+                        ctx.beginPath();
+                        ctx.lineWidth = 1;
+                        ctx.strokeStyle = 'rgba(255,255,255,' + opacity +')';
+                        ctx.moveTo(dot.x, dot.y);
+                        ctx.lineTo(otherDot.x, otherDot.y);
+                        ctx.stroke();
+                    }
+                }
+
+                //鼠标点之间的连线和捕捉
+                if(catchDot(dot)){
+                    let distance = dis(dot, mouse);
+                    let opacity = (1-(distance/22500)).toFixed(1);
+                    if(distance < 22500){
+                        ctx.beginPath();
+                        ctx.lineWidth = 1;
+                        ctx.strokeStyle = 'rgba(255,255,255,' + opacity +')';
+                        ctx.moveTo(dot.x, dot.y);
+                        ctx.lineTo(mouse.x, mouse.y);
+                        ctx.stroke();
+                        //捕捉
+                        if(distance > 10000){
+                            dot.x -= (dot.x - mouse.x)*0.02;
+                            dot.y -= (dot.y - mouse.y)*0.02;
+                        }
+                    }
+                }
+            }
+
+            rID = requestAnimationFrame(anime);
+            
+        }
+
+
+    </script>
+</body>
+</html>
