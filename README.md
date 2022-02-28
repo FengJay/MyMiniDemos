@@ -4,4 +4,3 @@
 
 ##### When reading blogs, it's often great to meet some novel web scopes that make you want to figure it out by youself
 ##### This repo exists to catch my webDemos that I make it from other moguls or compuletely DIY
->>>>>>> 1544c018c70be020ae910b855b1f7a3ce5f9240c
