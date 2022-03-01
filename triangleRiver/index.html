@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <canvas id="can"></canvas>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        body{
+            width: 100vw;
+            height: 100vh;
+        }
+        #can{
+            background-color: white;
+        }
+    </style>
+
+    <script>
+        let canvas = document.getElementById("can");
+        canvas.width = document.body.clientWidth;
+        canvas.height = document.body.clientHeight;
+        let ctx = canvas.getContext("2d");
+
+        let out = true; //初始化为已出界
+        let side, dir;  //起始边和方向
+        let prev, now, next;  //绘制triangle的三个点
+        let color = {};
+
+        let count = 0; //当前帧数
+        let rID = null;
+
+        //每次出界都要重新开始，初始化side,dir
+        function init(){   
+            prev = now = next = null;
+
+            //一开始是两个点，这两个点应该在页面边框的同一边，随机为四种情况
+            side = parseInt(Math.random()*4);  //0 up, 1 bottom, 2 left, 3 right
+
+            //由起始位置确定river的流向
+            dir = {
+                vx: (side == 0 || side == 1)? (parseInt(Math.random()*2)? 1 : -1) : (side == 2? 1 : -1),
+                vy: (side == 2 || side == 3)? (parseInt(Math.random()*2)? 1 : -1) : (side == 0? 1 : -1)
+            };
+        }
+
+        //生成新点
+        function newPoint(prevTemp, nowTemp){
+            if(!prevTemp){
+                prev = {
+                    x: (side == 0 || side == 1)? Math.random()*canvas.width : (side == 2 ? 0 : canvas.width),
+                    y: (side == 2 || side == 3)? Math.random()*canvas.height : (side == 0 ? 0 : canvas.height)
+                }
+                now = {
+                    x: (side == 0 || side == 1)? Math.random()*canvas.width : (side == 2 ? 0 : canvas.width),
+                    y: (side == 2 || side == 3)? Math.random()*canvas.height : (side == 0 ? 0 : canvas.height)
+                }
+            }else{
+                prev = prevTemp;
+                now = nowTemp;
+            }
+
+            next = {
+                x: now.x + (Math.random()*200) * dir.vx,
+                y: now.y + (Math.random()*200) * dir.vy
+            }
+
+            //判断是否出界
+            if(next.x < 0 || next.x > canvas.width || next.y < 0 || next.y > canvas.height){
+                out = true;
+            }
+        }
+
+        //动画包含每次新起始点的生成，延dir方向的新点生成，triangle的绘制和不同颜色的填充
+        function anime(){
+            //每一轮先判断是否出界，出界就开始绘制下一轮，并生成起始点
+            if(count%30 == 0){
+                color = {
+                    r: parseInt(Math.random()*256),
+                    g: parseInt(Math.random()*256),
+                    b: parseInt(Math.random()*256)
+                }
+
+                if(out){
+                    ctx.clearRect(0, 0, canvas.width, canvas.height); //先清空画布
+                    init();
+                    newPoint(prev, now);
+                    out = false;
+                    count = 0;
+                }else{
+                    newPoint(now, next);
+                }
+                drawTriangle();
+            }else{
+                //没到30帧，继续画当前三角，多个0.1透明度的三角叠加，达到缓慢出现的动画效果
+                drawTriangle();
+            }
+            
+            count++;
+            rID = requestAnimationFrame(anime);
+        }
+
+        //三个点确定，绘制三角形，随机生成颜色
+        function drawTriangle(){
+            //每一个三角形占30帧
+            let nowColor = `rgba(${color.r},${color.g},${color.b},${count%3==0?0.1:0})`;
+
+            ctx.beginPath();
+            ctx.strokeStyle = nowColor;
+            ctx.fillStyle = nowColor;
+            ctx.moveTo(prev.x, prev.y);
+            ctx.lineTo(now.x, now.y);
+            ctx.lineTo(next.x, next.y);
+            ctx.fill();
+        }
+
+        anime();
+
+        //控制动画停止继续
+        canvas.addEventListener("click",()=>{
+            if(rID){
+                cancelAnimationFrame(rID);
+                rID = null;
+            }else{
+                rID = requestAnimationFrame(anime);
+            }
+        })
+
+    </script>
+</body>
+</html>
