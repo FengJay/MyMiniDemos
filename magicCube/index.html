@@ -5,13 +5,13 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>3d魔方</title>
-    <link rel="stylesheet" href="./index.css">
-    <script src="./math.js"></script>
+    <link rel="stylesheet" href="./src/index.css">
+    <script src="./src/math.js"></script>
 
 </head>
 <body>
     <section id="cube" style="transform:matrix3d(1,0,0,0,0,1,0,0,0,0,1,0,0,0,0,1);">
-        <div class="brick">
+        <div class="brick front left bottom">
             <div class="field red"></div>
             <div class="field"></div>
             <div class="field"></div>
@@ -19,7 +19,7 @@
             <div class="field"></div>
             <div class="field black"></div>
         </div>
-        <div class="brick">
+        <div class="brick front mid bottom">
             <div class="field red"></div>
             <div class="field"></div>
             <div class="field"></div>
@@ -27,7 +27,7 @@
             <div class="field"></div>
             <div class="field black"></div>
         </div>
-        <div class="brick right">
+        <div class="brick front right bottom">
             <div class="field red"></div>
             <div class="field green"></div>
             <div class="field"></div>
@@ -35,7 +35,7 @@
             <div class="field"></div>
             <div class="field black"></div>
         </div>
-        <div class="brick">
+        <div class="brick mid left bottom">
             <div class="field"></div>
             <div class="field"></div>
             <div class="field"></div>
@@ -43,15 +43,15 @@
             <div class="field"></div>
             <div class="field black"></div>
         </div>
-        <div class="brick">
+        <div class="brick center bottom">
             <div class="field"></div>
             <div class="field"></div>
             <div class="field"></div>
             <div class="field"></div>
             <div class="field"></div>
-            <div class="field black" style="background-color: pink !important;"></div>
+            <div class="field black"></div>
         </div>
-        <div class="brick right">
+        <div class="brick mid right bottom">
             <div class="field"></div>
             <div class="field green"></div>
             <div class="field"></div>
@@ -59,7 +59,7 @@
             <div class="field"></div>
             <div class="field black"></div>
         </div>
-        <div class="brick">
+        <div class="brick behind left bottom">
             <div class="field"></div>
             <div class="field"></div>
             <div class="field orange"></div>
@@ -67,7 +67,7 @@
             <div class="field"></div>
             <div class="field black"></div>
         </div>
-        <div class="brick">
+        <div class="brick behind mid bottom">
             <div class="field"></div>
             <div class="field"></div>
             <div class="field orange"></div>
@@ -75,7 +75,7 @@
             <div class="field"></div>
             <div class="field black"></div>
         </div>
-        <div class="brick right">
+        <div class="brick behind right bottom">
             <div class="field"></div>
             <div class="field green"></div>
             <div class="field orange"></div>
@@ -83,7 +83,7 @@
             <div class="field"></div>
             <div class="field black"></div>
         </div>
-        <div class="brick">
+        <div class="brick front left mid">
             <div class="field red"></div>
             <div class="field"></div>
             <div class="field"></div>
@@ -91,7 +91,7 @@
             <div class="field"></div>
             <div class="field"></div>
         </div>
-        <div class="brick">
+        <div class="brick center front">
             <div class="field red"></div>
             <div class="field"></div>
             <div class="field"></div>
@@ -99,7 +99,7 @@
             <div class="field"></div>
             <div class="field"></div>
         </div>
-        <div class="brick right">
+        <div class="brick front right mid">
             <div class="field red"></div>
             <div class="field green"></div>
             <div class="field"></div>
@@ -107,7 +107,7 @@
             <div class="field"></div>
             <div class="field"></div>
         </div>
-        <div class="brick">
+        <div class="brick center left">
             <div class="field"></div>
             <div class="field"></div>
             <div class="field"></div>
@@ -115,7 +115,7 @@
             <div class="field"></div>
             <div class="field"></div>
         </div>
-        <div class="brick">
+        <div class="brick core">
             <div class="field"></div>
             <div class="field"></div>
             <div class="field"></div>
@@ -123,7 +123,7 @@
             <div class="field"></div>
             <div class="field"></div>
         </div>
-        <div class="brick right">
+        <div class="brick center right">
             <div class="field"></div>
             <div class="field green"></div>
             <div class="field"></div>
@@ -131,7 +131,7 @@
             <div class="field"></div>
             <div class="field"></div>
         </div>
-        <div class="brick">
+        <div class="brick behind left mid">
             <div class="field"></div>
             <div class="field"></div>
             <div class="field orange"></div>
@@ -139,7 +139,7 @@
             <div class="field"></div>
             <div class="field"></div>
         </div>
-        <div class="brick">
+        <div class="brick center hehind">
             <div class="field"></div>
             <div class="field"></div>
             <div class="field orange"></div>
@@ -147,7 +147,7 @@
             <div class="field"></div>
             <div class="field"></div>
         </div>
-        <div class="brick right">
+        <div class="brick behind right mid">
             <div class="field"></div>
             <div class="field green"></div>
             <div class="field orange"></div>
@@ -155,7 +155,7 @@
             <div class="field"></div>
             <div class="field"></div>
         </div>
-        <div class="brick">
+        <div class="brick front left top">
             <div class="field red"></div>
             <div class="field"></div>
             <div class="field"></div>
@@ -163,7 +163,7 @@
             <div class="field yellow"></div>
             <div class="field"></div>
         </div>
-        <div class="brick">
+        <div class="brick front mid top">
             <div class="field red"></div>
             <div class="field"></div>
             <div class="field"></div>
@@ -171,7 +171,7 @@
             <div class="field yellow"></div>
             <div class="field"></div>
         </div>
-        <div class="brick right">
+        <div class="brick front right top">
             <div class="field red"></div>
             <div class="field green"></div>
             <div class="field"></div>
@@ -179,7 +179,7 @@
             <div class="field yellow"></div>
             <div class="field"></div>
         </div>
-        <div class="brick">
+        <div class="brick mid left top">
             <div class="field"></div>
             <div class="field"></div>
             <div class="field"></div>
@@ -187,7 +187,7 @@
             <div class="field yellow"></div>
             <div class="field"></div>
         </div>
-        <div class="brick">
+        <div class="brick center top">
             <div class="field"></div>
             <div class="field"></div>
             <div class="field"></div>
@@ -195,7 +195,7 @@
             <div class="field yellow"></div>
             <div class="field"></div>
         </div>
-        <div class="brick right">
+        <div class="brick mid right top">
             <div class="field"></div>
             <div class="field green"></div>
             <div class="field"></div>
@@ -203,7 +203,7 @@
             <div class="field yellow"></div>
             <div class="field"></div>
         </div>
-        <div class="brick">
+        <div class="brick behind left top">
             <div class="field"></div>
             <div class="field"></div>
             <div class="field orange"></div>
@@ -211,7 +211,7 @@
             <div class="field yellow"></div>
             <div class="field"></div>
         </div>
-        <div class="brick">
+        <div class="brick behind mid top">
             <div class="field"></div>
             <div class="field"></div>
             <div class="field orange"></div>
@@ -219,7 +219,7 @@
             <div class="field yellow"></div>
             <div class="field"></div>
         </div>
-        <div class="brick right">
+        <div class="brick behind right top">
             <div class="field"></div>
             <div class="field green"></div>
             <div class="field orange"></div>
@@ -228,10 +228,21 @@
             <div class="field"></div>
         </div>
     </section>
-    <div class="btn" onclick="rotateOne()">右上</div>
+    <div class="btn" onclick="rotateOne(1)">右上</div>
+    <div class="btn" onclick="rotateOne(2)">右下</div>
+    <div class="btn" onclick="rotateOne(3)">左上</div>
+    <div class="btn" onclick="rotateOne(4)">左下</div>
+    <div class="btn" onclick="rotateOne(5)">上左</div>
+    <div class="btn" onclick="rotateOne(6)">上右</div>
+    <div class="btn" onclick="rotateOne(7)">下左</div>
+    <div class="btn" onclick="rotateOne(8)">下右</div>
+    <div class="btn" onclick="rotateOne(9)">前顺</div>
+    <div class="btn" onclick="rotateOne(10)">前逆</div>
+    <div class="btn" onclick="rotateOne(11)">后顺</div>
+    <div class="btn" onclick="rotateOne(12)">后逆</div>
 
-    <script src="./index.js"></script>
-    <script src="./game.js"></script>
+    <script src="./src/index.js"></script>
+    <script src="./src/game.js"></script>
     
 </body>
 </html>
