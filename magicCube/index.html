@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>3d魔方</title>
+    <link rel="stylesheet" href="./index.css">
+    <script src="./math.js"></script>
+
+</head>
+<body>
+    <section id="cube" style="transform:matrix3d(1,0,0,0,0,1,0,0,0,0,1,0,0,0,0,1);">
+        <div class="brick">
+            <div class="field red"></div>
+            <div class="field"></div>
+            <div class="field"></div>
+            <div class="field blue"></div>
+            <div class="field"></div>
+            <div class="field black"></div>
+        </div>
+        <div class="brick">
+            <div class="field red"></div>
+            <div class="field"></div>
+            <div class="field"></div>
+            <div class="field"></div>
+            <div class="field"></div>
+            <div class="field black"></div>
+        </div>
+        <div class="brick right">
+            <div class="field red"></div>
+            <div class="field green"></div>
+            <div class="field"></div>
+            <div class="field"></div>
+            <div class="field"></div>
+            <div class="field black"></div>
+        </div>
+        <div class="brick">
+            <div class="field"></div>
+            <div class="field"></div>
+            <div class="field"></div>
+            <div class="field blue"></div>
+            <div class="field"></div>
+            <div class="field black"></div>
+        </div>
+        <div class="brick">
+            <div class="field"></div>
+            <div class="field"></div>
+            <div class="field"></div>
+            <div class="field"></div>
+            <div class="field"></div>
+            <div class="field black" style="background-color: pink !important;"></div>
+        </div>
+        <div class="brick right">
+            <div class="field"></div>
+            <div class="field green"></div>
+            <div class="field"></div>
+            <div class="field"></div>
+            <div class="field"></div>
+            <div class="field black"></div>
+        </div>
+        <div class="brick">
+            <div class="field"></div>
+            <div class="field"></div>
+            <div class="field orange"></div>
+            <div class="field blue"></div>
+            <div class="field"></div>
+            <div class="field black"></div>
+        </div>
+        <div class="brick">
+            <div class="field"></div>
+            <div class="field"></div>
+            <div class="field orange"></div>
+            <div class="field"></div>
+            <div class="field"></div>
+            <div class="field black"></div>
+        </div>
+        <div class="brick right">
+            <div class="field"></div>
+            <div class="field green"></div>
+            <div class="field orange"></div>
+            <div class="field"></div>
+            <div class="field"></div>
+            <div class="field black"></div>
+        </div>
+        <div class="brick">
+            <div class="field red"></div>
+            <div class="field"></div>
+            <div class="field"></div>
+            <div class="field blue"></div>
+            <div class="field"></div>
+            <div class="field"></div>
+        </div>
+        <div class="brick">
+            <div class="field red"></div>
+            <div class="field"></div>
+            <div class="field"></div>
+            <div class="field"></div>
+            <div class="field"></div>
+            <div class="field"></div>
+        </div>
+        <div class="brick right">
+            <div class="field red"></div>
+            <div class="field green"></div>
+            <div class="field"></div>
+            <div class="field"></div>
+            <div class="field"></div>
+            <div class="field"></div>
+        </div>
+        <div class="brick">
+            <div class="field"></div>
+            <div class="field"></div>
+            <div class="field"></div>
+            <div class="field blue"></div>
+            <div class="field"></div>
+            <div class="field"></div>
+        </div>
+        <div class="brick">
+            <div class="field"></div>
+            <div class="field"></div>
+            <div class="field"></div>
+            <div class="field"></div>
+            <div class="field"></div>
+            <div class="field"></div>
+        </div>
+        <div class="brick right">
+            <div class="field"></div>
+            <div class="field green"></div>
+            <div class="field"></div>
+            <div class="field"></div>
+            <div class="field"></div>
+            <div class="field"></div>
+        </div>
+        <div class="brick">
+            <div class="field"></div>
+            <div class="field"></div>
+            <div class="field orange"></div>
+            <div class="field blue"></div>
+            <div class="field"></div>
+            <div class="field"></div>
+        </div>
+        <div class="brick">
+            <div class="field"></div>
+            <div class="field"></div>
+            <div class="field orange"></div>
+            <div class="field"></div>
+            <div class="field"></div>
+            <div class="field"></div>
+        </div>
+        <div class="brick right">
+            <div class="field"></div>
+            <div class="field green"></div>
+            <div class="field orange"></div>
+            <div class="field"></div>
+            <div class="field"></div>
+            <div class="field"></div>
+        </div>
+        <div class="brick">
+            <div class="field red"></div>
+            <div class="field"></div>
+            <div class="field"></div>
+            <div class="field blue"></div>
+            <div class="field yellow"></div>
+            <div class="field"></div>
+        </div>
+        <div class="brick">
+            <div class="field red"></div>
+            <div class="field"></div>
+            <div class="field"></div>
+            <div class="field"></div>
+            <div class="field yellow"></div>
+            <div class="field"></div>
+        </div>
+        <div class="brick right">
+            <div class="field red"></div>
+            <div class="field green"></div>
+            <div class="field"></div>
+            <div class="field"></div>
+            <div class="field yellow"></div>
+            <div class="field"></div>
+        </div>
+        <div class="brick">
+            <div class="field"></div>
+            <div class="field"></div>
+            <div class="field"></div>
+            <div class="field blue"></div>
+            <div class="field yellow"></div>
+            <div class="field"></div>
+        </div>
+        <div class="brick">
+            <div class="field"></div>
+            <div class="field"></div>
+            <div class="field"></div>
+            <div class="field"></div>
+            <div class="field yellow"></div>
+            <div class="field"></div>
+        </div>
+        <div class="brick right">
+            <div class="field"></div>
+            <div class="field green"></div>
+            <div class="field"></div>
+            <div class="field"></div>
+            <div class="field yellow"></div>
+            <div class="field"></div>
+        </div>
+        <div class="brick">
+            <div class="field"></div>
+            <div class="field"></div>
+            <div class="field orange"></div>
+            <div class="field blue"></div>
+            <div class="field yellow"></div>
+            <div class="field"></div>
+        </div>
+        <div class="brick">
+            <div class="field"></div>
+            <div class="field"></div>
+            <div class="field orange"></div>
+            <div class="field"></div>
+            <div class="field yellow"></div>
+            <div class="field"></div>
+        </div>
+        <div class="brick right">
+            <div class="field"></div>
+            <div class="field green"></div>
+            <div class="field orange"></div>
+            <div class="field"></div>
+            <div class="field yellow"></div>
+            <div class="field"></div>
+        </div>
+    </section>
+    <div class="btn" onclick="rotateOne()">右上</div>
+
+    <script src="./index.js"></script>
+    <script src="./game.js"></script>
+    
+</body>
+</html>
