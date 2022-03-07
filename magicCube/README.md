@@ -102,8 +102,8 @@ function rotateOne(pos, dir){ //根据按钮旋转指定的面90度
 虽然把之前的茸乱的代码改成了brick对象化进行操作，但是还是没有摆脱垃圾的位置信息处理写法  
 ```javascript
 let bricks = [];
-let aims = document.querySelectorAll(".brick");
-for(let dom of aims){
+let doms = document.querySelectorAll(".brick");
+for(let dom of doms){
     let brick = new Brick();
     brick.dom = dom;
     brick.position = dom.className.replace("brick ", "");
