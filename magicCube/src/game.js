@@ -6,8 +6,8 @@ let field = new Field();
 
 //绑定初始状态的每个brick的dom
 let bricks = [];
-let aims = document.querySelectorAll(".brick");
-for(let dom of aims){
+let doms = document.querySelectorAll(".brick");
+for(let dom of doms){
     let brick = new Brick();
     brick.dom = dom;
     brick.position = dom.className.replace("brick ", "");
