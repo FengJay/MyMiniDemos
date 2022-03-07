@@ -94,12 +94,44 @@ function rotateOne(choice){ //根据按钮旋转指定的面90度
 但是始终觉得这种写法实在是太垃圾了，还很繁琐  
 不如设计一个brick类，绑定brick_div，然后保存其位置信息  
 后面将做出改进  
-————————————————————————————————————————————————————————————————————————————  
+——————————————————————————————————————————————————
 续：  
 虽然把之前的茸乱的代码改成了brick对象化进行操作，但是还是没有摆脱垃圾的位置信息处理写法  
 准确说我实在想不到一个将位置信息抽象化的好写法，还是太笨了  
 也因为目前这种笨拙的位置表示，我实在找不出每次旋转位置变化有什么规律  
 看以后会不会有好的思路吧，也打算去搜搜大佬写法  
 如果有大佬看见了这个demo，也希望能不吝赐教  
+```javascript
+function Brick(){
+    
+}
 
+Brick.prototype.dom = null;
+Brick.prototype.position = "";
+
+Brick.prototype.changePos = function(pos, dir){
+    if(this.position.match(pos)){
+        if(dir == 1){
+            if(pos == "left" || pos == "right"){
+                this.leftRightDown();
+            }else if(pos == "top" || pos == "bottom"){
+                this.topBottomLeft();
+            }else{  //front和behind
+                this.frontBehindNeg();
+            }
+        }else{
+            if(pos == "left" || pos == "right"){
+                this.leftRightUp();
+            }else if(pos == "top" || pos == "bottom"){
+                this.topBottomRight();
+            }else{  //front和behind
+                this.frontBehindPos();
+            }
+        }
+    }else{
+        return
+    }
+
+}
+```
 
