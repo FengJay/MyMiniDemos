@@ -3,6 +3,9 @@ let fieldMatrix, fieldMatrixStr, field_e, fieldTheta, field_rID;
 let field;
 
 function rotateOne(choice){ //根据按钮旋转指定的面90度
+    if(field_rID){//如果上一次动画还未结束, 不执行
+        return;
+    }
     //先获取对应面的9个bricks，并确定旋转轴的单位向量
     getField(choice);
 
