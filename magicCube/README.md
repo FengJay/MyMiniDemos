@@ -33,33 +33,34 @@ function rotateAnimationField(){
     fieldCounter++;
     let FN = 30; //帧数
 
-    fieldTheta = Math.PI/2;
+    field.theta = Math.PI/2;
 
-    for(let dom of field){
-        fieldMatrixStr = document.defaultView.getComputedStyle(dom, null).transform;  //获取浏览器计算后的cubic的3d矩阵值
+    for(let brick of field.bricks){
+        field.matrixStr = document.defaultView.getComputedStyle(brick.dom, null).transform;  //获取浏览器计算后的cubic的3d矩阵值
+        //把上一次装态的matrix的数据提取出来，并生成这个表示原状态的矩阵
         
-        let nums = fieldMatrixStr.replace(/(matrix3d\()|[ \)]/g, "").split(",").map((item)=>+item);
+        let nums = field.matrixStr.replace(/(matrix3d\()|[ \)]/g, "").split(",").map((item)=>+item);
         if(nums.length != 16){
-            fieldMatrix = [[1,0,0,0],
+            field.matrix = [[1,0,0,0],
                             [0,1,0,0],
                             [0,0,1,0],
                             [0,0,0,1]]
         }else{
-            fieldMatrix = math.matrix([nums.slice(0,4),
+            field.matrix = math.matrix([nums.slice(0,4),
                                 nums.slice(4,8),
                                 nums.slice(8,12),
                                 nums.slice(12,16)])
         }
-        myrotate3d(fieldMatrix, field_e, fieldTheta / FN, dom); 
+        myrotate3d(field.matrix, field.e, field.theta / FN, brick.dom); 
     }
     
     if(!(fieldCounter%FN)) {  //100帧，停止
-        cancelAnimationFrame(field_rID);
-        field_rID = null;  
+        cancelAnimationFrame(field.rID);
+        field.rID = null;  
         fieldCounter = 0;
         return
     }
-    field_rID = requestAnimationFrame(rotateAnimationField);
+    field.rID = requestAnimationFrame(rotateAnimationField);
 }
 ```
 但是不同于整体旋转中多次触发事件停止上一次动画  
@@ -72,18 +73,20 @@ function rotateAnimationField(){
 这就意味着这里的单个旋转不能用之前的积分这种特点完成，因为单次旋转必须是准确的90°  
 不能是个约数，所以改成了每帧旋转相同的角度，如这里共30帧，则每帧旋转3°  
 ```javascript
-function rotateOne(choice){ //根据按钮旋转指定的面90度
-    if(field_rID){//如果上一次动画还未结束, 不执行
+function rotateOne(pos, dir){ //根据按钮旋转指定的面90度
+    if(field.rID){//如果上一次动画还未结束, 不执行
         return;
     }
-    //先获取对应面的9个bricks，并确定旋转轴的单位向量
-    getField(choice);
+
+    //获取旋转面，pos<string>为front, behind, left, right, top, bottom之一， dir<int>为+-1表示正反方向
+    field.bricks = bricks.filter((brick) => brick.position.match(pos));
+    field.e = [(pos == "right"||pos == "left")? dir : 0, (pos == "top"||pos == "bottom")? dir : 0, (pos == "front"||pos == "behind")? dir : 0];
 
     //获取到后就可以开始旋转
     rotateAnimationField();
 
     //旋转过后还需要改变其位置类
-    changePosition(choice)
+    bricks.map((brick) => {brick.changePos(pos, dir); });
 }
 ```
 #### 旋转对象即9个brick_div的获取
@@ -97,6 +100,17 @@ function rotateOne(choice){ //根据按钮旋转指定的面90度
 ——————————————————————————————————————————————————
 续：  
 虽然把之前的茸乱的代码改成了brick对象化进行操作，但是还是没有摆脱垃圾的位置信息处理写法  
+```javascript
+let bricks = [];
+let aims = document.querySelectorAll(".brick");
+for(let dom of aims){
+    let brick = new Brick();
+    brick.dom = dom;
+    brick.position = dom.className.replace("brick ", "");
+    bricks.push(brick);
+}
+
+```
 准确说我实在想不到一个将位置信息抽象化的好写法，还是太笨了  
 也因为目前这种笨拙的位置表示，我实在找不出每次旋转位置变化有什么规律  
 看以后会不会有好的思路吧，也打算去搜搜大佬写法  
