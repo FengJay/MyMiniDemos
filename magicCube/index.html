@@ -228,20 +228,21 @@
             <div class="field"></div>
         </div>
     </section>
-    <div class="btn" onclick="rotateOne(1)">右上</div>
-    <div class="btn" onclick="rotateOne(2)">右下</div>
-    <div class="btn" onclick="rotateOne(3)">左上</div>
-    <div class="btn" onclick="rotateOne(4)">左下</div>
-    <div class="btn" onclick="rotateOne(5)">上左</div>
-    <div class="btn" onclick="rotateOne(6)">上右</div>
-    <div class="btn" onclick="rotateOne(7)">下左</div>
-    <div class="btn" onclick="rotateOne(8)">下右</div>
-    <div class="btn" onclick="rotateOne(9)">前顺</div>
-    <div class="btn" onclick="rotateOne(10)">前逆</div>
-    <div class="btn" onclick="rotateOne(11)">后顺</div>
-    <div class="btn" onclick="rotateOne(12)">后逆</div>
+    <div class="btn" onclick="rotateOne('right', -1)">右上</div>
+    <div class="btn" onclick="rotateOne('right', 1)">右下</div>
+    <div class="btn" onclick="rotateOne('left', -1)">左上</div>
+    <div class="btn" onclick="rotateOne('left', 1)">左下</div>
+    <div class="btn" onclick="rotateOne('top', 1)">上左</div>
+    <div class="btn" onclick="rotateOne('top', -1)">上右</div>
+    <div class="btn" onclick="rotateOne('bottom', 1)">下左</div>
+    <div class="btn" onclick="rotateOne('bottom', -1)">下右</div>
+    <div class="btn" onclick="rotateOne('front', -1)">前顺</div>
+    <div class="btn" onclick="rotateOne('front', 1)">前逆</div>
+    <div class="btn" onclick="rotateOne('behind', -1)">后顺</div>
+    <div class="btn" onclick="rotateOne('behind', 1)">后逆</div>
 
     <script src="./src/index.js"></script>
+    <script src="./src/brick.js"></script>
     <script src="./src/game.js"></script>
     
 </body>
